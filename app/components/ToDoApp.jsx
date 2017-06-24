@@ -3,6 +3,7 @@ import React from "react";
 import ToDoList from "ToDoList";
 import AddToDo from "AddToDo";
 import ToDoSearch from "ToDoSearch";
+import uuid from 'node-uuid';
 
 var ToDoApp = React.createClass({
   getInitialState: function() {
@@ -30,7 +31,15 @@ var ToDoApp = React.createClass({
     };
   },
   handleAddToDo: function(text) {
-    alert("new todo: " + text);
+    this.setState({
+      todos: [
+        ...this.state.todos,
+        {
+          id: uuid(),
+          text: text
+        }
+      ]
+    })
   },
   handleSearch: function(showCompleted, searchText) {
     this.setState({
