@@ -1,38 +1,23 @@
 "use strict";
 import React from "react";
+import uuid from 'node-uuid';
+
 import ToDoList from "ToDoList";
 import AddToDo from "AddToDo";
 import ToDoSearch from "ToDoSearch";
-import uuid from 'node-uuid';
+import ToDoAPI from 'ToDoAPI';
+
 
 var ToDoApp = React.createClass({
   getInitialState: function() {
     return {
       showCompleted: false,
       searchText: '',
-      todos: [
-        {
-          id: 1,
-          text: "Walk the Dog",
-          completed: false
-        },
-        {
-          id: 2,
-          text: "Clean the yard",
-          completed: true
-        },
-        {
-          id: 3,
-          text: "Do the dishes",
-          completed: true
-        },
-        {
-          id: 4,
-          text: "Mop the floors",
-          completed: false
-        }
-      ]
+      todos: ToDoAPI.getToDos()
     };
+  },
+  componentDidUpdate: function () {
+    ToDoAPI.setToDos(this.state.todos);
   },
   handleAddToDo: function(text) {
     this.setState({
