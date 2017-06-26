@@ -1,6 +1,7 @@
 "use strict";
 import React from "react";
 import uuid from "node-uuid";
+import moment from "moment";
 
 import ToDoList from "ToDoList";
 import AddToDo from "AddToDo";
@@ -13,6 +14,7 @@ var ToDoApp = React.createClass({
       showCompleted: false,
       searchText: "",
       todos: ToDoAPI.getToDos()
+
     };
   },
   componentDidUpdate: function() {
@@ -25,7 +27,9 @@ var ToDoApp = React.createClass({
         {
           id: uuid(),
           text: text,
-          completed: false
+          completed: false,
+          createdAt: moment().unix(),
+          completedAt: undefined
         }
       ]
     });
@@ -34,6 +38,7 @@ var ToDoApp = React.createClass({
     var updatedToDos = this.state.todos.map(todo => {
       if (todo.id === id) {
         todo.completed = !todo.completed;
+        todo.completedAt = todo.completed ? moment().unix() : undefined;
       }
       return todo;
     });
