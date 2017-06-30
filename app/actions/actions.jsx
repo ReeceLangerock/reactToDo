@@ -24,3 +24,10 @@ export var toggleToDo = id => {
     id
   };
 };
+
+export var addToDos = (todos) => {
+  return {
+    type: "ADD_TODOS",
+    todos
+  };
+};

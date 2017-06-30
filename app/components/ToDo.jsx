@@ -26,11 +26,12 @@ export var ToDo = React.createClass({
       >
         <div>
           <input type="checkbox" checked={completed} />
-          <div>
+        </div>
+        <div>
             <p>{text}</p>
             <p className="todo__subtext">{renderDate()}</p>
           </div>
-        </div>
+        
       </div>
     );
   }
