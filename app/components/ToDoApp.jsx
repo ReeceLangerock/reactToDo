@@ -6,7 +6,7 @@ import moment from "moment";
 import ToDoList from "ToDoList";
 import AddToDo from "AddToDo";
 import ToDoSearch from "ToDoSearch";
-import ToDoAPI from "ToDoAPI";
+var ToDoAPI = require("ToDoAPI");
 
 var ToDoApp = React.createClass({
   getInitialState: function() {

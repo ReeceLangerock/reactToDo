@@ -14,11 +14,6 @@ store.subscribe(() => {
 
 })
 
-store.dispatch(actions.addToDo('Clean the yard'));
-store.dispatch(actions.setSearchText('yard'));
-store.dispatch(actions.toggleShowCompleted());
-
-
 $(document).foundation();
 
 // App css
