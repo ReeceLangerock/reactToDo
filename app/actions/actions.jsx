@@ -25,7 +25,7 @@ export var startAddToDo = text => {
     };
     var todoRef = firebaseRef.child("todos").push(todo);
 
-  return todoRef.then(() => {
+    return todoRef.then(() => {
       dispatch(
         addToDo({
           ...todo,
@@ -42,10 +42,11 @@ export var toggleShowCompleted = () => {
   };
 };
 
-export var toggleToDo = id => {
+export var updateToDo = (id, updates) => {
   return {
-    type: "TOGGLE_TODO",
-    id
+    type: "UPDATE_TODO",
+    id,
+    updates
   };
 };
 
@@ -53,5 +54,19 @@ export var addToDos = todos => {
   return {
     type: "ADD_TODOS",
     todos
+  };
+};
+
+export var startToDo = (id, completed) => {
+  return (dispatch, getState) => {
+    var todoRef = firebaseRef.child(`todos/${id}`);
+    var updates = {
+      completed,
+      completedAt: completed ? moment().unix() : null
+    };
+
+    return todoRef.update(updates).then(() => {
+      dispatch(updateToDo(id, updates));
+    });
   };
 };
