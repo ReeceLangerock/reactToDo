@@ -9,7 +9,7 @@ import ToDoApp from "ToDoApp";
 var actions = require("actions");
 var store = require("configureStore").configure();
 var ToDoAPI = require("ToDoAPI");
-
+import Login from 'Login'
 
 store.dispatch(actions.startAddToDos())
 
@@ -20,7 +20,15 @@ require("style!css!sass!applicationStyles");
 
 ReactDOM.render(
   <Provider store={store}>
-    <ToDoApp />
+    <Router history ={hashHistory}>
+      <Route path = "/">
+        <Route path = "todos" component = {ToDoApp}/>
+        <IndexRoute component = {Login}/>
+
+      </Route>
+
+    </Router>
+
   </Provider>,
   document.getElementById("app")
 );
