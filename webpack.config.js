@@ -1,5 +1,7 @@
 var webpack = require("webpack");
-var path = require('path')
+var path = require("path");
+
+process.env.NODE_ENV = process.env.NODE_ENV || "development";
 
 module.exports = {
   entry: [
@@ -12,8 +14,13 @@ module.exports = {
   },
   plugins: [
     new webpack.ProvidePlugin({
-      '$': 'jquery',
-      'jQuery': 'jquery'
+      $: "jquery",
+      jQuery: "jquery"
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compressor: {
+        warnings: false
+      }
     })
   ],
   output: {
@@ -23,18 +30,13 @@ module.exports = {
 
   resolve: {
     root: __dirname,
-    modulesDirectories: [
-      'node_modules',
-      './app/components',
-      './app/api'
-    ],
+    modulesDirectories: ["node_modules", "./app/components", "./app/api"],
     alias: {
-      app: 'app',
+      app: "app",
       applicationStyles: "app/styles/app.scss",
       actions: "app/actions/actions.jsx",
       reducers: "app/reducers/reducers.jsx",
       configureStore: "app/store/configureStore.jsx"
-
     },
     extensions: ["", ".js", ".jsx"]
   },
@@ -53,8 +55,10 @@ module.exports = {
   },
   sassLoader: {
     includePaths: [
-      path.resolve(__dirname, './node_modules/foundation-sites/scss')
+      path.resolve(__dirname, "./node_modules/foundation-sites/scss")
     ]
   },
-  devtool: "inline-source-map"
+  devtool: process.env.NODE_ENV === "production"
+    ? undefined
+    : "inline-source-map"
 };
