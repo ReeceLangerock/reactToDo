@@ -6,7 +6,8 @@ export var ToDoList = React.createClass({
   render: function() {
     var { todos, showCompleted, searchText } = this.props;
     var renderToDos = () => {
-      if (todos.length === 0) {
+      var filterToDos = ToDoAPI.filterToDos(todos, showCompleted, searchText);
+      if (filterToDos.length === 0) {
         return <p className="container__message">Nothing To Do</p>;
       } else {
         return ToDoAPI.filterToDos(
