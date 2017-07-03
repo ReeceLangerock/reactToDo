@@ -10,6 +10,17 @@ export var searchTextReducer = (state = "", action) => {
   }
 };
 
+export var authReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "LOGIN":
+      return { uid: action.uid };
+    case "LOGOUT":
+      return {};
+    default:
+      return state;
+  }
+};
+
 export var showCompletedReducer = (state = false, action) => {
   switch (action.type) {
     case "TOGGLE_SHOW_COMPLETED":

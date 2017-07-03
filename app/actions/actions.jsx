@@ -109,3 +109,16 @@ export var startLogout = () => {
     });
   };
 }
+
+export var login = (uid) => {
+  return {
+    type: "LOGIN",
+    uid
+  };
+}
+
+export var logout = () => {
+  return {
+    type: "LOGOUT"
+  };
+}

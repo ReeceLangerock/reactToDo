@@ -137,6 +137,23 @@ describe("Actions", () => {
       }, done);
     });
 
+    it("should generate LOGIN action object", () => {
+      const action = {
+        type: "LOGIN",
+        uid: "uid123"
+      };
+      const res = actions.login(action.uid);
+      expect(res).toEqual(action);
+    });
+
+    it("should generate LOGOUT action object", () => {
+      const action = {
+        type: "LOGOUT",
+      };
+      const res = actions.logout(action);
+      expect(res).toEqual(action);
+    });
+
     it("should populate todos and dispatch ADD_TODO action", done => {
       const store = createMockStore({});
 
